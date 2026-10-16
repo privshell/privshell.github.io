@@ -82,7 +82,7 @@ svg.chip{width:100%;height:auto;display:block;overflow:visible}
   box-shadow:0 1px 0 var(--line),0 0 0 1px var(--line);transition:transform .25s,box-shadow .25s,opacity .35s}
 .part:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line),0 14px 30px -18px oklch(0.3 0.08 308 / .45)}
 .part.wide{grid-column:span 2}
-.part.root{border-top:5px solid var(--violet)} #rnd .part{border-top:5px dashed var(--ink)} .part.nr{border-top:5px solid var(--teal)} .part.plain{border-top:5px solid var(--ink)}
+.part.root{border-top:5px solid var(--violet)} .part.nr{border-top:5px solid var(--teal)} .part.plain{border-top:5px solid var(--ink)}
 .part h3{margin:0;font:400 40px/.9 var(--disp);color:var(--ink);letter-spacing:.01em}
 .part.wide h3{font-size:58px}
 .part h3 i{font-style:normal;color:var(--violet)} .part.nr h3 i{color:var(--teal)}
@@ -126,7 +126,7 @@ footer .links a:hover{filter:brightness(1.15)}
     <div>
       <h1>PRIV<br><span>SHELL</span></h1>
       <p class="tag">Open-source <em>Android power tools.</em> Root when you have it, Shizuku when you don't.</p>
-      <div class="stats" id="stats"><span><b id="sN">15</b> projects</span><span><b id="sS">57</b> stars</span><span>updated <b id="sU">this week</b></span></div>
+      <div class="stats" id="stats"><span><b id="sN">8</b> projects</span><span><b id="sS">38</b> stars</span><span>updated <b id="sU">this week</b></span></div>
     </div>
     <div class="chipbox">
       <svg class="chip" id="chip" viewBox="0 0 600 330" role="group" aria-label="Filter projects by interface"></svg>
@@ -153,26 +153,18 @@ const SERIES = [
   { id: 'void', name: 'VOID', line: 'Own every app, packet and wake-up.' },
   { id: 'pulse', name: 'PULSE', line: 'Battery and installs, done properly.' },
   { id: 'modules', name: '// MODULES', line: 'KernelSU tools with a WebUI, inside your root manager.' },
-  { id: 'lab', name: 'LAB', line: 'Hubs, audits and experiments.' },
-  { id: 'rnd', name: 'R&D', line: 'Under research and testing. Not ready for daily use.' }
+  { id: 'lab', name: 'LAB', line: 'Hubs, audits and experiments.' }
 ];
-/* Curated parts. Live stars and dates come from the GitHub API; new repos show up in LAB by themselves. */
+/* Curated parts. Live stars and dates come from the GitHub API. */
 const PARTS = [
   { r: 'void-apps', n: 'VOID // APPS', s: 'void', d: 'Power app manager: freeze, debloat, permissions, services and boot.', p: ['ROOT', 'SHIZUKU', 'ADB', 'APP'], l: 'Kotlin', st: 14, w: 1 },
-  { r: 'VOID-WALL', n: 'VOID // WALL', s: 'void', d: 'A modern, root-optional firewall.', p: ['ROOT', 'SHIZUKU', 'ADB', 'SHEVERY'], st: 3 },
-  { r: 'void-purge', n: 'VOID // PURGE', s: 'void', d: 'Deep ADB cleaner for Shevery.', p: ['SHIZUKU', 'ROOT', 'SHEVERY'], st: 9 },
-  { r: 'void-autostart', n: 'VOID // AUTOSTART', s: 'void', d: 'Autostart and boot manager.', p: ['SHIZUKU', 'SHEVERY'], st: 4 },
-  { r: 'void-pulse', n: 'VOID // PULSE', s: 'void', d: 'Notification and Do Not Disturb studio.', p: ['SHIZUKU', 'ROOT', 'SHEVERY'], st: 2 },
   { r: 'pulse-battery', n: 'PULSE // BATTERY', s: 'pulse', d: 'Battery and wakelock doctor, with a built-in backup vault.', p: ['SHIZUKU', 'ROOT', 'APP'], l: 'Kotlin', st: 13, w: 1 },
-  { r: 'pulse-install', n: 'PULSE // INSTALL', s: 'pulse', d: 'Universal APK, APKS, XAPK and APKM installer.', p: ['SHIZUKU', 'ROOT', 'ADB', 'SHEVERY'], st: 3 },
   { r: 'orbit-store', n: 'ORBIT // STORE', s: 'modules', d: 'A module store inside your root manager. Four catalogs, curated lists, sha256 checked.', p: ['ROOT', 'KSU', 'WEBUI'], st: 0, w: 1 },
   { r: 'aegis-firewall', n: 'AEGIS // FIREWALL', s: 'modules', d: 'Kernel-level per-app firewall.', p: ['ROOT', 'KSU', 'WEBUI'], st: 0 },
   { r: 'apex-apps', n: 'APEX // APPS', s: 'modules', d: 'App manager with snapshots and reversible states.', p: ['ROOT', 'KSU', 'WEBUI'], st: 0 },
   { r: 'selinux-manager', n: 'SELINUX // MANAGER', s: 'modules', d: 'Modes, policy rules and a denial inspector. Every change is read back.', p: ['ROOT', 'KSU', 'WEBUI'], st: 0 },
-  { r: 'nexus-ai', n: 'NEXUS // AI', s: 'modules', d: 'Multi-provider AI chat in your root manager: OpenAI, Anthropic, Gemini, DeepSeek and more.', p: ['ROOT', 'KSU', 'WEBUI'], st: 0 },
-  { r: 'privacy-audit', n: 'PRIVACY // AUDIT', s: 'lab', d: 'Permission and privacy audit, no root needed.', p: ['SHIZUKU', 'ADB', 'SHEVERY'], st: 5 },
   { r: 'android-app-hub', n: 'APP // HUB', s: 'lab', d: 'Seven Android app directories in one self-hosted Termux dashboard.', p: [], tags: ['TERMUX'], l: 'Python', st: 4 },
-  { r: 'Sni-anti-dpi', n: 'SNI // ANTI-DPI', s: 'rnd', d: 'SNI-based script for getting past deep packet inspection.', p: [], tags: ['SCRIPT', 'NETWORK'], l: 'Shell', st: 0, soon: 1 }
+  { r: 'awesome-shizuku', n: 'AWESOME // SHIZUKU', s: 'lab', d: 'Curated list of awesome Android apps making use of Shizuku.', p: ['SHIZUKU'], l: 'Python', st: 2 }
 ];
 const HIDE = new Set([USER, USER + '.github.io']);
 let filter = '';
